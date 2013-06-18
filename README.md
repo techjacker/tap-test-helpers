@@ -9,6 +9,7 @@ npm install tap-test-helpers
 
 ### Docs
 [Yuidocs documentation here](docs/index.html)
+- link only works when checkout repo and preview README locally
 
 ## API
 ### Test Helpers API Class
