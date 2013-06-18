@@ -1,0 +1,139 @@
+{
+    "project": {},
+    "files": {
+        "lib/api.js": {
+            "name": "lib/api.js",
+            "modules": {
+                "ApiHelpers": 1
+            },
+            "classes": {
+                "ApiSilent": 1,
+                "ApiLoud": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/main.js": {
+            "name": "lib/main.js",
+            "modules": {
+                "TestHelpers": 1
+            },
+            "classes": {
+                "Api": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "ApiHelpers": {
+            "name": "ApiHelpers",
+            "submodules": {},
+            "classes": {
+                "ApiSilent": 1,
+                "ApiLoud": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/api.js",
+            "line": 18,
+            "description": "API / module.exports test helper methods"
+        },
+        "TestHelpers": {
+            "name": "TestHelpers",
+            "submodules": {},
+            "classes": {
+                "Api": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/main.js",
+            "line": 9,
+            "description": "module.exports test helper methods"
+        }
+    },
+    "classes": {
+        "ApiSilent": {
+            "name": "ApiSilent",
+            "shortname": "ApiSilent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ApiHelpers",
+            "namespace": "",
+            "file": "lib/api.js",
+            "line": 11,
+            "description": "Silent tests - not printed to STDOUT.\nInstead the results are returned in JSON format in tap.Producer.on('end') evt"
+        },
+        "ApiLoud": {
+            "name": "ApiLoud",
+            "shortname": "ApiLoud",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "TestHelpers",
+                "Api"
+            ],
+            "module": "ApiHelpers",
+            "namespace": "",
+            "file": "lib/api.js",
+            "line": 18,
+            "description": "Class of tests that print results to STDOUT"
+        },
+        "Api": {
+            "name": "Api",
+            "shortname": "Api",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TestHelpers",
+            "namespace": "",
+            "file": "lib/main.js",
+            "line": 9,
+            "description": "API test helper class: exports Loud class of ApiHelpers module",
+            "static": 1,
+            "uses": [
+                "ApiLoud"
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/api.js",
+            "line": 27,
+            "description": "### Is the api correctly exposed?\nChecks that all keys in array are present on the object and are functions.",
+            "example": [
+                "\n\t// 1 test shd fail; Object.twoPot is not exposed\n\tApiTestHelpers.methodsExposed(['onePot', 'twoPot', 'threePot'], {\n\t\t'onePot': function(argument) {},\n\t\t'threePot': function(argument) {}\n\t});"
+            ],
+            "itemtype": "method",
+            "name": "methodsExposed",
+            "params": [
+                {
+                    "name": "arrayofFnNames",
+                    "description": "list of api methods that shd be exposed",
+                    "type": "Array"
+                },
+                {
+                    "name": "apiObj",
+                    "description": "object literal that contains api methods",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "tap.test function is returned",
+                "type": "Test"
+            },
+            "class": "ApiLoud",
+            "module": "ApiHelpers"
+        }
+    ],
+    "warnings": []
+}

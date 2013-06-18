@@ -1,0 +1,43 @@
+{
+  "name": "tap-test-helpers",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "test helpers for node tap",
+  "tags": [
+    "tap",
+    "node-tap",
+    "test",
+    "tests",
+    "testing",
+    "utils",
+    "utilities"
+  ],
+  "author": {
+    "name": "Andrew Griffiths",
+    "email": "mail@andrewgriffithsonline.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:techjacker/tap-test-helpers.git"
+  },
+  "engines": [
+    "node >= 0.6.0"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "tap ./test",
+    "docs": "yuidoc -o ./docs ./lib"
+  },
+  "dependencies": {
+    "tap": ">=0.4",
+    "tap-wrapper": ">=0.0.1",
+    "underscore": ">=1.4"
+  },
+  "devDependencies": {
+    "tap": ">=0.4",
+    "tap-wrapper": ">=0.0.1",
+    "underscore": ">=1.4",
+    "yuidocjs": "~0.3.44",
+    "live-reload": "~0.2.0"
+  }
+}
