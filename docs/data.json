@@ -19,7 +19,20 @@
                 "TestHelpers": 1
             },
             "classes": {
-                "Api": 1
+                "Api": 1,
+                "Oop": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/oop.js": {
+            "name": "lib/oop.js",
+            "modules": {
+                "OopHelpers": 1
+            },
+            "classes": {
+                "OopSilent": 1,
+                "OopLoud": 1
             },
             "fors": {},
             "namespaces": {}
@@ -44,14 +57,29 @@
             "name": "TestHelpers",
             "submodules": {},
             "classes": {
-                "Api": 1
+                "Api": 1,
+                "Oop": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "lib/main.js",
-            "line": 9,
+            "line": 18,
             "description": "module.exports test helper methods"
+        },
+        "OopHelpers": {
+            "name": "OopHelpers",
+            "submodules": {},
+            "classes": {
+                "OopSilent": 1,
+                "OopLoud": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/oop.js",
+            "line": 18,
+            "description": "API / module.exports test helper methods"
         }
     },
     "classes": {
@@ -103,6 +131,55 @@
             "uses": [
                 "ApiLoud"
             ]
+        },
+        "Oop": {
+            "name": "Oop",
+            "shortname": "Oop",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TestHelpers",
+            "namespace": "",
+            "file": "lib/main.js",
+            "line": 18,
+            "description": "OOP test helper class: exports Loud class of ApiHelpers module",
+            "static": 1,
+            "uses": [
+                "OopLoud"
+            ]
+        },
+        "OopSilent": {
+            "name": "OopSilent",
+            "shortname": "OopSilent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "OopHelpers",
+            "namespace": "",
+            "file": "lib/oop.js",
+            "line": 11,
+            "description": "Silent tests - not printed to STDOUT.\nInstead the results are returned in JSON format in tap.Producer.on('end') evt"
+        },
+        "OopLoud": {
+            "name": "OopLoud",
+            "shortname": "OopLoud",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "TestHelpers",
+                "Oop"
+            ],
+            "module": "OopHelpers",
+            "namespace": "",
+            "file": "lib/oop.js",
+            "line": 18,
+            "description": "Class of tests that print results to STDOUT"
         }
     },
     "classitems": [
@@ -111,7 +188,7 @@
             "line": 27,
             "description": "### Is the api correctly exposed?\nChecks that all keys in array are present on the object and are functions.",
             "example": [
-                "\n\t// 1 test shd fail; Object.twoPot is not exposed\n\tApiTestHelpers.methodsExposed(['onePot', 'twoPot', 'threePot'], {\n\t\t'onePot': function(argument) {},\n\t\t'threePot': function(argument) {}\n\t});"
+                "\n\t// 1 test shd fail; Object.twoPot is not exposed\n\trequire.('tap-test-helpers').Api.methodsExposed(['onePot', 'twoPot', 'threePot'], {\n\t\t'onePot': function(argument) {},\n\t\t'threePot': function(argument) {}\n\t});"
             ],
             "itemtype": "method",
             "name": "methodsExposed",
@@ -133,6 +210,30 @@
             },
             "class": "ApiLoud",
             "module": "ApiHelpers"
+        },
+        {
+            "file": "lib/oop.js",
+            "line": 27,
+            "description": "Check protoype chain is correctly set up",
+            "example": [
+                "\n\tfunction A() {};\n\tA.prototype.foo = function(x, y) {\n\t\treturn x + y;\n\t};\n\n\tfunction B() {};\n\tB.prototype.foo = function(x, y) {\n\t\treturn 2 + this.super_.foo(x, y);\n\t};\n\n\trequire.('extasy').extendCtor(B, A);\n\n\t// all tests PASS\n\trequire.('tap-test-helpers').Oop.inheritsCheckProto(B, A);"
+            ],
+            "itemtype": "method",
+            "name": "inheritsCheckProto",
+            "params": [
+                {
+                    "name": "Child",
+                    "description": "The child class",
+                    "type": "Class"
+                },
+                {
+                    "name": "Parent",
+                    "description": "The parent class",
+                    "type": "Class"
+                }
+            ],
+            "class": "OopLoud",
+            "module": "OopHelpers"
         }
     ],
     "warnings": []

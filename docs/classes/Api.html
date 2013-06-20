@@ -47,11 +47,19 @@
             
                 <li><a href="../classes/ApiSilent.html">ApiSilent</a></li>
             
+                <li><a href="../classes/Oop.html">Oop</a></li>
+            
+                <li><a href="../classes/OopLoud.html">OopLoud</a></li>
+            
+                <li><a href="../classes/OopSilent.html">OopSilent</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/ApiHelpers.html">ApiHelpers</a></li>
+            
+                <li><a href="../modules/OopHelpers.html">OopHelpers</a></li>
             
                 <li><a href="../modules/TestHelpers.html">TestHelpers</a></li>
             
@@ -299,7 +307,7 @@
 
             <div class="example-content">
                 <pre class="code prettyprint"><code>// 1 test shd fail; Object.twoPot is not exposed
-ApiTestHelpers.methodsExposed(['onePot', 'twoPot', 'threePot'], {
+require.('tap-test-helpers').Api.methodsExposed(['onePot', 'twoPot', 'threePot'], {
     'onePot': function(argument) {},
     'threePot': function(argument) {}
 });

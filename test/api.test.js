@@ -10,7 +10,7 @@ var _                    = require('underscore'),
 /*--------------------------------------
 api exposed tests
 ---------------------------------------*/
-test('API.methodsExposed is exposed correctly (how meta)', function (t) {
+test('Api.methodsExposed is exposed correctly (how meta)', function (t) {
 	t.ok(_.isFunction(methodsExposed), 'normal (loud) test function is exposed');
 	t.ok(_.isFunction(methodsExposedSilent.test), 'silent test function is exposed');
 	t.end();

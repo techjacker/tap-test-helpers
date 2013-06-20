@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/api.js</title>
+    <title>lib/oop.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -98,7 +98,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/api.js</h1>
+                        <h1 class="file-heading">File: lib/oop.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -109,56 +109,67 @@ var _    = require(&#x27;underscore&#x27;),
 /**
  * API / module.exports test helper methods
  *
- * @module ApiHelpers
+ * @module OopHelpers
  */
-var ApiHelpers = {
+var OopHelpers = {
 	/**
 	 * Silent tests - not printed to STDOUT.
 	 * Instead the results are returned in JSON format in tap.Producer.on(&#x27;end&#x27;) evt
 	 *
-	 * @class ApiSilent
+	 * @class OopSilent
 	 */
-	ApiSilent: {},
+	OopSilent: {},
 	/**
 	 * Class of tests that print results to STDOUT
 	 *
-	 * @class ApiLoud
+	 * @class OopLoud
 	 * @extensionfor TestHelpers
 	 */
-	ApiLoud: {}
+	OopLoud: {}
 };
 
 /**
- * ### Is the api correctly exposed?
- * Checks that all keys in array are present on the object and are functions.
+ * Check protoype chain is correctly set up
  *
  * @example
- * 	// 1 test shd fail; Object.twoPot is not exposed
- * 	require.(&#x27;tap-test-helpers&#x27;).Api.methodsExposed([&#x27;onePot&#x27;, &#x27;twoPot&#x27;, &#x27;threePot&#x27;], {
- * 		&#x27;onePot&#x27;: function(argument) {},
- * 		&#x27;threePot&#x27;: function(argument) {}
- * 	});
+ * 	function A() {};
+ * 	A.prototype.foo = function(x, y) {
+ * 		return x + y;
+ * 	};
  *
- * @method methodsExposed
+ * 	function B() {};
+ * 	B.prototype.foo = function(x, y) {
+ * 		return 2 + this.super_.foo(x, y);
+ * 	};
  *
- * @param  {array} arrayofFnNames list of api methods that shd be exposed
- * @param  {Object} apiObj         object literal that contains api methods
+ * 	require.(&#x27;extasy&#x27;).extendCtor(B, A);
  *
- * @return {Test}                tap.test function is returned
+ * 	// all tests PASS
+ * 	require.(&#x27;tap-test-helpers&#x27;).Oop.inheritsCheckProto(B, A);
+ *
+ *
+ * @method inheritsCheckProto
+ * @param  {Class} Child  The child class
+ * @param  {Class} Parent The parent class
+ *
  */
-var methodsExposed = function (arrayofFnNames, apiObj) {
-	return test(&#x27;API methods exposed&#x27;, function (t) {
-		_(arrayofFnNames).each(function (val) {
-			t.ok(_.isFunction(apiObj[val]), val + &#x27; fn is exposed&#x27;);
-		});
+var inheritsCheckProto = function (Child, Parent) {
+	return test(&#x27;check prototype chain&#x27;, function(t) {
+		var Inst = new Child();
+		t.ok(Inst.constructor === Child, &#x27;Inst.constructor === Child&#x27;);
+		t.ok(Inst.super_ === Parent.prototype, &#x27;Inst.super_ === Parent.prototype&#x27;);
+		t.ok(Object.getPrototypeOf(Inst) === Child.prototype, &#x27;Object.getPrototypeOf(Inst) === Child.prototype&#x27;);
+		t.ok(Object.getPrototypeOf(Object.getPrototypeOf(Inst)) === Parent.prototype, &#x27;Object.getPrototypeOf(Object.getPrototypeOf(Inst)) === Parent.prototype&#x27;);
+		t.ok(Inst instanceof Child, &#x27;Inst instanceof Child&#x27;);
+		t.ok(Inst instanceof Parent, &#x27;Inst instanceof Parent&#x27;);
 		this.end(t);
 	}.bind(this));
 };
 
-ApiHelpers.ApiLoud.methodsExposed = wrap.WrapLoud(methodsExposed);
-ApiHelpers.ApiSilent.methodsExposed = wrap.WrapSilent(methodsExposed);
+OopHelpers.OopLoud.inheritsCheckProto = wrap.WrapLoud(inheritsCheckProto);
+OopHelpers.OopSilent.inheritsCheckProto = wrap.WrapSilent(inheritsCheckProto);
 
-module.exports = ApiHelpers;
+module.exports = OopHelpers;
     </pre>
 </div>
 

@@ -3,16 +3,25 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "Api",
         "ApiLoud",
-        "ApiSilent"
+        "ApiSilent",
+        "Oop",
+        "OopLoud",
+        "OopSilent"
     ],
     "modules": [
         "ApiHelpers",
+        "OopHelpers",
         "TestHelpers"
     ],
     "allModules": [
         {
             "displayName": "ApiHelpers",
             "name": "ApiHelpers",
+            "description": "API / module.exports test helper methods"
+        },
+        {
+            "displayName": "OopHelpers",
+            "name": "OopHelpers",
             "description": "API / module.exports test helper methods"
         },
         {
