@@ -28,7 +28,7 @@ TestHelper.Api.methodsExposed(['onePot', 'twoPot', 'threePot'], {
 
 ### Oop Helper Class
 
-#### ```.Api.inheritsCheckProto(['method', 'names'], module)```
+#### ```.Oop.inheritsCheckProto(ChildClass, ParentClass)```
 
 ```JavaScript
 function A() {};
